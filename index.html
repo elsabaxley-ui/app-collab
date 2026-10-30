@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-170RLRQRE2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-170RLRQRE2');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BerryBox — Multiplayer Mini-Game Arcade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div class="ambient-bg"></div>
+
+  <!-- TOP NAVIGATION BAR (BERRYBOX CLEAN WHITE + SHIFTING BLUE) -->
+  <header class="topbar">
+    <div class="brand" id="backToHubBtn" title="Back to BerryBox Hub">
+      <svg viewBox="0 0 64 64" width="38" height="38" class="square-berry-svg">
+        <defs>
+          <linearGradient id="berryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" class="grad-stop-1" />
+            <stop offset="100%" class="grad-stop-2" />
+          </linearGradient>
+        </defs>
+        <path d="M22 10 L26 3 L32 9 L38 3 L42 10 Z" fill="#1e88e5" stroke="#0a0f1d" stroke-width="3.2" stroke-linejoin="round"/>
+        <rect x="8" y="10" width="48" height="48" rx="13" ry="13" fill="url(#berryGrad)" stroke="#0a0f1d" stroke-width="3.8"/>
+        <path d="M15 20 Q15 16 20 16 L28 16" fill="none" stroke="#ffffff" stroke-width="3.2" stroke-linecap="round" opacity="0.85"/>
+        <ellipse cx="24" cy="34" rx="4.2" ry="5.2" fill="#0a0f1d"/>
+        <ellipse cx="40" cy="34" rx="4.2" ry="5.2" fill="#0a0f1d"/>
+        <circle cx="22.5" cy="32" r="1.7" fill="#ffffff"/>
+        <circle cx="38.5" cy="32" r="1.7" fill="#ffffff"/>
+        <path d="M28 39 Q32 43 36 39" fill="none" stroke="#0a0f1d" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      <span class="brand-title">Berry<span>Box</span></span>
+      <span class="collab-badge">ELSA × BYRON</span>
+    </div>
+
+    <div class="topbar-controls">
+      <button id="hubNavBtn" class="pill-btn hidden">🎮 Arcade Hub</button>
+      <button id="mapSwitchBtn" class="pill-btn hidden">🗺️ Lobby Setup</button>
+      <button id="shopNavBtn" class="pill-btn">🫐 Character Shop (48)</button>
+
+      <!-- Coin Balance Pill -->
+      <div class="wallet-pill" id="walletPillBtn" title="Click to open the 48 Cute Characters Shop">
+        <span>🪙</span>
+        <strong id="coinBalanceText">1000</strong>
+      </div>
+
+      <!-- Equipped Character & Account Button -->
+      <div class="account-pill" id="switchAccountBtn" title="Switch or Create Account">
+        <canvas id="topbarAvatarCanvas" width="30" height="30"></canvas>
+        <div class="account-pill-meta">
+          <strong id="equippedCharName">Lil Blueberry</strong>
+          <span id="topbarUsername">@Byron</span>
+        </div>
+      </div>
+
+      <button id="soundToggleBtn" class="pill-btn" title="Toggle Sound Effects">🔊</button>
+    </div>
+  </header>
+
+  <!-- SCREEN 1: MINI-GAME HUB -->
+  <main id="hubScreen" class="screen active">
+    <section class="hero-banner">
+      <div class="hero-tag">BERRYBOX ARCADE • 48 CHUBBY CHARACTERS • 1–4 PLAYERS</div>
+      <h1>Play With Your Equipped Chubby Character!</h1>
+      <p>Win rounds and matches to earn 🪙 Coins and unlock all 48 custom characters in the Shop.</p>
+    </section>
+
+    <section class="games-grid">
+      <!-- GAME 1: SUPER TAG ARENA -->
+      <article class="game-card featured" data-game="tag">
+        <div class="game-card-preview tag-preview">
+          <div class="preview-platform p1"></div>
+          <div class="preview-platform p2"></div>
+          <div class="preview-pad"></div>
+          <canvas id="hubPreviewCanvas" width="380" height="190" style="position:absolute;inset:0;width:100%;height:100%;"></canvas>
+          <span class="live-badge">PLAY NOW • 1–4P + BOTS</span>
+        </div>
+        <div class="game-card-body">
+          <div class="game-card-header">
+            <h2>⚡ Super Tag Arena</h2>
+            <span class="player-count-pill">🪙 +25 to +100 Coins</span>
+          </div>
+          <p>Fast-paced 2D platformer tag with your BerryBox Chubby Characters! Use jump pads, warp portals, and double-jumps to escape before time runs out.</p>
+          <div class="keybind-chips">
+            <span class="chip p1-chip">P1: W A D</span>
+            <span class="chip p2-chip">P2: T F H</span>
+            <span class="chip p3-chip">P3: I J L</span>
+            <span class="chip p4-chip">P4: ↑ ← →</span>
+          </div>
+          <button class="play-btn" id="launchTagBtn">▶ Play Super Tag Arena</button>
+        </div>
+      </article>
+
+      <!-- PLACEHOLDER CARDS FOR BYRON & ELSA TO BUILD NEXT -->
+      <article class="game-card coming-soon">
+        <div class="game-card-preview sumo-preview">
+          <span class="soon-badge">NEXT UP</span>
+          <div class="soon-icon">❄️</div>
+        </div>
+        <div class="game-card-body">
+          <div class="game-card-header">
+            <h2>Snowbrawl / Rooftop Knockoff</h2>
+            <span class="player-count-pill">1–4 Players</span>
+          </div>
+          <p>Build up knockback % and blast your friends off shrinking icy islands into the water!</p>
+          <button class="play-btn disabled" disabled>In Progress (Collab Slot)</button>
+        </div>
+      </article>
+
+      <article class="game-card coming-soon">
+        <div class="game-card-preview bomb-preview">
+          <span class="soon-badge">IDEA SLOT</span>
+          <div class="soon-icon">🏀</div>
+        </div>
+        <div class="game-card-body">
+          <div class="game-card-header">
+            <h2>Basket / Soccer Random</h2>
+            <span class="player-count-pill">1–2 Players</span>
+          </div>
+          <p>Physics sports chaos where every point randomizes the court, ball, and gravity!</p>
+          <button class="play-btn disabled" disabled>In Progress (Collab Slot)</button>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <!-- SCREEN 2: TAG GAME SETUP MODAL / LOBBY -->
+  <section id="tagSetupScreen" class="screen">
+    <div class="setup-container">
+      <div class="setup-header">
+        <h2>⚡ Super Tag Arena — Lobby</h2>
+        <p>Pick each player's <strong>Chubby Character</strong>, set slots to <strong>Human</strong>, <strong>Bot</strong>, or <strong>Off</strong>, and choose an Arena!</p>
+      </div>
+
+      <!-- 4 PLAYER SLOTS -->
+      <div class="player-slots-grid" id="playerSlotsGrid"></div>
+
+      <!-- MAP & MODE SELECTION -->
+      <div class="setup-options-row">
+        <div class="setup-group">
+          <label>Select Arena Map</label>
+          <div class="map-selector" id="mapSelector"></div>
+        </div>
+
+        <div class="setup-group">
+          <label>Round Duration</label>
+          <div class="duration-selector" id="durationSelector">
+            <button class="opt-btn" data-time="45">⚡ 45s Blitz</button>
+            <button class="opt-btn active" data-time="60">⏱️ 60s Classic</button>
+            <button class="opt-btn" data-time="90">🔥 90s Marathon</button>
+          </div>
+          <label style="margin-top: 12px;">Wins Needed for Trophy</label>
+          <div class="duration-selector" id="winsSelector">
+            <button class="opt-btn" data-wins="2">First to 2</button>
+            <button class="opt-btn active" data-wins="3">First to 3</button>
+            <button class="opt-btn" data-wins="5">First to 5</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="setup-actions">
+        <button id="startMatchBtn" class="start-match-btn">🚀 START MATCH</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCREEN 3: ACTIVE TAG ARENA -->
+  <section id="tagArenaScreen" class="screen">
+    <div class="arena-hud">
+      <div class="hud-players" id="hudPlayersLeft"></div>
+      <div class="hud-center">
+        <div class="map-Title-label" id="hudMapName">SUNNY MEADOW</div>
+        <div class="timer-pill" id="hudTimer">01:00</div>
+        <div class="it-status-banner" id="hudItBanner">P1 IS IT!</div>
+      </div>
+      <div class="hud-players" id="hudPlayersRight"></div>
+    </div>
+
+    <div class="canvas-wrapper">
+      <canvas id="tagCanvas" width="1280" height="720"></canvas>
+
+      <!-- ROUND OVER / MATCH OVER OVERLAY -->
+      <div id="roundOverlay" class="round-overlay hidden">
+        <div class="overlay-card">
+          <div class="overlay-badge" id="overlayBadge">ROUND OVER!</div>
+          <h2 id="overlayTitle">Player 1 Got Caught Holding the Tag!</h2>
+          <p id="overlaySubtitle">Everyone else scores +1 point!</p>
+          <div class="scoreboard-row" id="overlayScoreboard"></div>
+          <div class="overlay-buttons">
+            <button id="nextRoundBtn" class="start-match-btn">Next Round ▶</button>
+            <button id="changeSetupOverlayBtn" class="pill-btn">Change Map / Players</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="controls-footer" id="controlsFooter"></div>
+  </section>
+
+  <!-- SCREEN 4: 48 CUTE CHUBBY CHARACTERS COIN SHOP -->
+  <section id="shopScreen" class="screen">
+    <div class="shop-container">
+      <div class="shop-header">
+        <div>
+          <h2>🫐 Cute Chubby Characters Shop (48)</h2>
+          <p class="muted-line">Unlock characters with 🪙 Coins earned in-game! Only Lil Blueberry (#1) is unlocked at start.</p>
+        </div>
+        <div class="tier-filter-bar" id="tierFilterBar">
+          <button class="tier-btn active" data-tier="All">All (48)</button>
+          <button class="tier-btn" data-tier="Starter">Starter</button>
+          <button class="tier-btn" data-tier="Common">Common</button>
+          <button class="tier-btn" data-tier="Rare">Rare</button>
+          <button class="tier-btn" data-tier="Epic">Epic</button>
+          <button class="tier-btn" data-tier="Legendary">Legendary</button>
+        </div>
+        <div class="wallet-pill">
+          <span>🪙</span>
+          <strong id="shopCoinText">1000</strong>
+          <span>Coins</span>
+        </div>
+      </div>
+      <div class="char-grid" id="charShopGrid"></div>
+    </div>
+  </section>
+
+  <!-- LOGIN / SWITCH ACCOUNT MODAL -->
+  <div class="modal-backdrop hidden" id="authModal">
+    <div class="auth-card">
+      <div class="auth-card-head">
+        <svg viewBox="0 0 64 64" width="38" height="38" class="square-berry-svg">
+          <path d="M22 10 L26 3 L32 9 L38 3 L42 10 Z" fill="#1e88e5" stroke="#0a0f1d" stroke-width="3.2" stroke-linejoin="round"/>
+          <rect x="8" y="10" width="48" height="48" rx="13" ry="13" fill="#1d6ff2" stroke="#0a0f1d" stroke-width="3.8"/>
+          <ellipse cx="24" cy="34" rx="4.2" ry="5.2" fill="#0a0f1d"/>
+          <ellipse cx="40" cy="34" rx="4.2" ry="5.2" fill="#0a0f1d"/>
+          <circle cx="22.5" cy="32" r="1.7" fill="#ffffff"/>
+          <circle cx="38.5" cy="32" r="1.7" fill="#ffffff"/>
+          <path d="M28 39 Q32 43 36 39" fill="none" stroke="#0a0f1d" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+        <div>
+          <h2>Switch or Create Account</h2>
+          <p class="muted-line">Save your 🪙 Coins and unlocked Chubby Characters on this device!</p>
+        </div>
+        <button class="close-modal-btn" id="closeAuthModalBtn">✕</button>
+      </div>
+
+      <div id="savedAccountsWrap" style="margin-bottom:12px;"></div>
+
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <input type="text" id="authUsernameInput" class="clean-input" placeholder="Username (e.g. Byron or Elsa)" />
+        <input type="password" id="authPassInput" class="clean-input" placeholder="Password / PIN (optional)" />
+        <button class="play-btn" id="authSubmitBtn">🚀 Enter BerryBox</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toastBox" class="toast hidden"></div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
