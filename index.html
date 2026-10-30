@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recess Arcade — Multiplayer Mini-Games</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <!-- TOP NAVIGATION BAR -->
+  <header class="topbar">
+    <div class="brand" id="backToHubBtn" title="Back to Arcade Hub">
+      <span class="brand-logo">⚡</span>
+      <span class="brand-title">RECESS<span>ARCADE</span></span>
+      <span class="collab-badge">ELSA × BYRON</span>
+    </div>
+
+    <div class="topbar-controls">
+      <button id="hubNavBtn" class="pill-btn hidden">🏠 All Games</button>
+      <button id="mapSwitchBtn" class="pill-btn hidden">🗺️ Change Setup</button>
+      <button id="soundToggleBtn" class="pill-btn" title="Toggle Sound Effects">🔊 Sound: ON</button>
+    </div>
+  </header>
+
+  <!-- SCREEN 1: MINI-GAME HUB -->
+  <main id="hubScreen" class="screen active">
+    <section class="hero-banner">
+      <div class="hero-tag">LOCAL MULTIPLAYER • 1 KEYBOARD • ZERO INSTALL</div>
+      <h1>Pick a Mini-Game &amp; Crowd Around the Keyboard</h1>
+      <p>Built for quick 3-minute battles between classes. Up to 4 players on one keyboard!</p>
+    </section>
+
+    <section class="games-grid">
+      <!-- GAME 1: SUPER TAG.IO -->
+      <article class="game-card featured" data-game="tag">
+        <div class="game-card-preview tag-preview">
+          <div class="preview-platform p1"></div>
+          <div class="preview-platform p2"></div>
+          <div class="preview-pad"></div>
+          <div class="preview-char c1 it-glow">
+            <div class="it-crown">👑</div>
+            <div class="eyes"><span></span><span></span></div>
+          </div>
+          <div class="preview-char c2">
+            <div class="eyes"><span></span><span></span></div>
+          </div>
+          <div class="preview-char c3">
+            <div class="eyes"><span></span><span></span></div>
+          </div>
+          <span class="live-badge">PLAY NOW • 2–4P</span>
+        </div>
+        <div class="game-card-body">
+          <div class="game-card-header">
+            <h2>Super Tag Arena</h2>
+            <span class="player-count-pill">2–4 Players + Bots</span>
+          </div>
+          <p>Fast-paced platformer tag inspired by TagGame.io! Use jump pads, portals, wall-jumps, and double-jumps to escape before the timer hits zero.</p>
+          <div class="keybind-chips">
+            <span class="chip p1-chip">P1: W A D</span>
+            <span class="chip p2-chip">P2: T F H</span>
+            <span class="chip p3-chip">P3: I J L</span>
+            <span class="chip p4-chip">P4: ↑ ← →</span>
+          </div>
+          <button class="play-btn" id="launchTagBtn">Play Super Tag ▶</button>
+        </div>
+      </article>
+
+      <!-- PLACEHOLDER CARDS FOR BYRON & ELSA TO BUILD NEXT -->
+      <article class="game-card coming-soon">
+        <div class="game-card-preview sumo-preview">
+          <span class="soon-badge">NEXT UP</span>
+          <div class="soon-icon">💥</div>
+        </div>
+        <div class="game-card-body">
+          <div class="game-card-header">
+            <h2>Rooftop Knockoff</h2>
+            <span class="player-count-pill">2–4 Players</span>
+          </div>
+          <p>Dash and bump your friends off shrinking floating islands. Last player standing wins the crown!</p>
+          <button class="play-btn disabled" disabled>In Progress (Collab Slot)</button>
+        </div>
+      </article>
+
+      <article class="game-card coming-soon">
+        <div class="game-card-preview bomb-preview">
+          <span class="soon-badge">IDEA SLOT</span>
+          <div class="soon-icon">💣</div>
+        </div>
+        <div class="game-card-body">
+          <div class="game-card-header">
+            <h2>Boom Pass</h2>
+            <span class="player-count-pill">2–4 Players</span>
+          </div>
+          <p>Hot potato with a ticking cartoon bomb! Pass it before the fuse runs out and launches you into orbit.</p>
+          <button class="play-btn disabled" disabled>In Progress (Collab Slot)</button>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <!-- SCREEN 2: TAG GAME SETUP MODAL / LOBBY -->
+  <section id="tagSetupScreen" class="screen">
+    <div class="setup-container">
+      <div class="setup-header">
+        <h2>⚡ Super Tag Arena — Lobby</h2>
+        <p>Toggle who's playing! Set unused slots to <strong>Bot</strong> or <strong>Off</strong>, pick a map, and hit Start.</p>
+      </div>
+
+      <!-- 4 PLAYER SLOTS -->
+      <div class="player-slots-grid" id="playerSlotsGrid">
+        <!-- Populated dynamically by tagGame.js -->
+      </div>
+
+      <!-- MAP & MODE SELECTION -->
+      <div class="setup-options-row">
+        <div class="setup-group">
+          <label>Select Arena Map</label>
+          <div class="map-selector" id="mapSelector">
+            <!-- Populated dynamically from maps.js -->
+          </div>
+        </div>
+
+        <div class="setup-group">
+          <label>Round Duration</label>
+          <div class="duration-selector" id="durationSelector">
+            <button class="opt-btn" data-time="45">⚡ 45s Blitz</button>
+            <button class="opt-btn active" data-time="60">⏱️ 60s Classic</button>
+            <button class="opt-btn" data-time="90">🔥 90s Marathon</button>
+          </div>
+          <label style="margin-top: 12px;">Wins Needed for Trophy</label>
+          <div class="duration-selector" id="winsSelector">
+            <button class="opt-btn" data-wins="2">First to 2</button>
+            <button class="opt-btn active" data-wins="3">First to 3</button>
+            <button class="opt-btn" data-wins="5">First to 5</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="setup-actions">
+        <button id="startMatchBtn" class="start-match-btn">🚀 START MATCH</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCREEN 3: ACTIVE TAG ARENA -->
+  <section id="tagArenaScreen" class="screen">
+    <div class="arena-hud">
+      <div class="hud-players" id="hudPlayersLeft"></div>
+      <div class="hud-center">
+        <div class="map-Title-label" id="hudMapName">SUNNY MEADOW</div>
+        <div class="timer-pill" id="hudTimer">01:00</div>
+        <div class="it-status-banner" id="hudItBanner">P1 IS IT!</div>
+      </div>
+      <div class="hud-players" id="hudPlayersRight"></div>
+    </div>
+
+    <div class="canvas-wrapper">
+      <canvas id="tagCanvas" width="1280" height="720"></canvas>
+
+      <!-- ROUND OVER / MATCH OVER OVERLAY -->
+      <div id="roundOverlay" class="round-overlay hidden">
+        <div class="overlay-card">
+          <div class="overlay-badge" id="overlayBadge">ROUND OVER!</div>
+          <h2 id="overlayTitle">Player 1 Got Caught Holding the Tag!</h2>
+          <p id="overlaySubtitle">Everyone else scores +1 point!</p>
+          <div class="scoreboard-row" id="overlayScoreboard"></div>
+          <div class="overlay-buttons">
+            <button id="nextRoundBtn" class="start-match-btn">Next Round ▶</button>
+            <button id="changeSetupOverlayBtn" class="pill-btn">Change Map / Players</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="controls-footer" id="controlsFooter">
+      <!-- Live keybind reminder bar -->
+    </div>
+  </section>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
